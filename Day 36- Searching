@@ -1,0 +1,77 @@
+Spiral traversal
+
+//{ Driver Code Starts
+import java.io.*;
+import java.util.*;
+
+class GFG {
+    public static void main(String args[]) throws IOException {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+
+        while (t-- > 0) {
+            int r = sc.nextInt();
+            int c = sc.nextInt();
+
+            int matrix[][] = new int[r][c];
+
+            for (int i = 0; i < r; i++) {
+                for (int j = 0; j < c; j++) matrix[i][j] = sc.nextInt();
+            }
+            Solution ob = new Solution();
+            ArrayList<Integer> ans = ob.spirallyTraverse(matrix);
+            for (Integer val : ans) System.out.print(val + " ");
+            System.out.println();
+
+            System.out.println("~");
+        }
+    }
+}
+// } Driver Code Ends
+
+
+class Solution {
+    // Function to return a list of integers denoting spiral traversal of matrix.
+    public ArrayList<Integer> spirallyTraverse(int mat[][]) {
+        
+        ArrayList<Integer> list=new ArrayList<>();
+        if(mat==null || mat.length==0 || mat[0].length==0)
+        {
+            return list;
+        }
+        // code here
+        
+        int startRow=0,startCol=0,endRow=mat.length-1,endCol=mat[0].length-1;
+        while(startRow<=endRow && startCol<=endCol)
+        {
+            //top
+            for(int j=startCol;j<=endCol;j++)
+            {
+                list.add(mat[startRow][j]);
+            }
+            startRow++;
+            //right
+            for(int i=startRow;i<=endRow;i++)
+            {
+                list.add(mat[i][endCol]);
+            }
+            endCol--;
+            //bottom
+            if(startRow<=endRow){
+            for(int j=endCol;j>=startCol;j--)
+            {
+                list.add(mat[endRow][j]);
+            }
+            endRow--;}
+            //left
+            if(startCol<=endCol)
+            {
+            for(int i=endRow;i>=startRow;i--)
+            {
+                list.add(mat[i][startCol]);
+            }
+            startCol++;}
+            
+        }
+   return list; }
+}
