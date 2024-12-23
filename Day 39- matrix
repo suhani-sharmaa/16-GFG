@@ -1,0 +1,79 @@
+searching in a row wise sorted matrix
+
+//{ Driver Code Starts
+import java.io.*;
+import java.util.*;
+
+class GFG {
+    public static void main(String args[]) throws IOException {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+
+        while (t > 0) {
+            int rows = sc.nextInt();
+            int columns = sc.nextInt();
+
+            int matrix[][] = new int[rows][columns];
+
+            for (int i = 0; i < rows; i++) {
+                for (int j = 0; j < columns; j++) {
+                    matrix[i][j] = sc.nextInt();
+                }
+            }
+            int target = sc.nextInt();
+
+            Solution x = new Solution();
+
+            if (x.searchRowMatrix(matrix, target))
+                System.out.println("true");
+            else
+                System.out.println("false");
+            t--;
+
+            System.out.println("~");
+        }
+    }
+}
+// } Driver Code Ends
+
+
+
+
+class Solution {
+    public static boolean binarySearch(int mat[],int target)
+    {
+        int start=0,end=mat.length-1;
+        while(start<=end)
+        {
+            int mid=(start)+(end-start)/2;
+            if(mat[mid]==target)
+            {
+                return true;
+            }
+            else if(mat[mid]>target)
+            {
+                end=mid-1;
+            }
+            else start=mid+1;
+        }
+        return false;
+    }
+    // Function to search a given number in row-column sorted matrix.
+    public boolean searchRowMatrix(int[][] mat, int x) {
+        // code here
+        if(mat==null || mat.length==0 || mat[0].length==0)
+        {
+            return false;
+        }
+        boolean ans=true;
+        for(int i=0;i<mat.length;i++)
+        {
+            if(binarySearch(mat[i],x))
+            {
+                ans=true;
+                break;
+            }
+        }
+        
+   return ans; }
+}
