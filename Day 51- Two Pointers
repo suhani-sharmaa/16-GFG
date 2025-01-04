@@ -1,0 +1,67 @@
+3 sum
+
+//{ Driver Code Starts
+// Initial Template for Java
+import java.io.*;
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+        Scanner sc = new Scanner(System.in);
+        int t = Integer.parseInt(sc.nextLine());
+        while (t-- > 0) {
+            String[] arr1Str = sc.nextLine().split(" ");
+            int[] arr = Arrays.stream(arr1Str).mapToInt(Integer::parseInt).toArray();
+            int target = Integer.parseInt(sc.nextLine());
+
+            Solution ob = new Solution();
+            int ans = ob.countTriplets(arr, target);
+            System.out.println(ans);
+            System.out.println("~");
+        }
+    }
+}
+// } Driver Code Ends
+
+
+class Solution {
+    public int countTriplets(int[] arr, int target) {
+        // Code Here
+        int count=0;
+        for(int i=0;i<arr.length-2;i++)
+        {
+            int curr=arr[i];
+            int p=i+1,q=arr.length-1;
+            while(p<q)
+            {
+                if(curr+arr[p]+arr[q]==target)
+                {
+                    int ele1=arr[p],ele2=arr[q],cnt1=0,cnt2=0;
+                    while(p<=q && arr[p]==ele1)
+                    {
+                        cnt1++;
+                        p++;
+                    }
+                    while(p<=q && arr[q]==ele2)
+                    {
+                        cnt2++;
+                        q--;
+                    }
+                    if(ele1==ele2)
+                    {
+                        count+=(cnt1*(cnt1-1))/2;
+                    }
+                    else
+                    count+=(cnt1*cnt2);
+                   
+                }
+                else if(curr+arr[p]+arr[q]<target)
+                {
+                    p++;
+                }
+                else q--;
+            }
+        }
+   return count; }
+}
